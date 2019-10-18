@@ -4,6 +4,10 @@ import './App.css';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import themeFile from './util/theme';
 import jwtDecode from 'jwt-decode';
+// Redux 
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 // Components
 import Navbar from './components/Navbar';
 import AuthRoute from './util/AuthRoute';
@@ -16,14 +20,14 @@ import { MuiThemeProvider } from '@material-ui/core';
 
 const theme = createMuiTheme(themeFile);
 
-let authenticated;
+let authenticated = false;
 const token = localStorage.FBIdToken;
 
 if(token){
   const decodedToken = jwtDecode(token);
   console.log(decodedToken);
   if(decodedToken.exp * 1000 < Date.now()){
-    window.location.href = '/login';
+    window.location.href = '/login'
     authenticated = false;
   } else {
     authenticated = true;
@@ -34,18 +38,21 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <div className="App">
+        <Provider store={store}>
+        
         <Router>
           <Navbar />
           <div className="container">
             <Switch>
               <Route path="/" exact component={home} />
-              <AuthRoute path="/login" exact component={login} authenticated={authenticated}/>
-              <AuthRoute path="/signup" exact component={signup} authenticated={authenticated}/>
+              <AuthRoute exact path="/login"  component={login} authenticated={authenticated}/>
+              <AuthRoute exact path="/signup"  component={signup} authenticated={authenticated}/>
             </Switch>
           </div>
         </Router>
-      </div>
+        
+        </Provider>
+        
       </MuiThemeProvider>
     );
   }
