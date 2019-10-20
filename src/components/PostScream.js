@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {withStyles}  from '@material-ui/core/styles';
+import MyButton from '../util/MyButton';
 
 // Redux
 import { connect } from 'react-redux';
@@ -17,7 +18,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { classes } from 'istanbul-lib-coverage';
-import MyButton from '../util/MyButton';
+
 
 // Icons
 import AddIcon from '@material-ui/icons/Add';
