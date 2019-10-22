@@ -11,7 +11,7 @@ import { SET_AUTHENTICATED, SET_UNAUTHENTICATED } from './redux/type';
 import { logoutUser, getUserData } from './redux/actions/userActions';
 
 // Components
-import Navbar from './components/Navbar';
+import Navbar from './components/layout/Navbar';
 import AuthRoute from './util/AuthRoute';
 
 // PAges
@@ -19,15 +19,18 @@ import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
 import { MuiThemeProvider } from '@material-ui/core';
+import user from './pages/user';
 import axios from 'axios';
 
 const theme = createMuiTheme(themeFile);
+
+axios.defaults.baseURL = 'https://us-central1-social-app-62bf1.cloudfunctions.net/api'
 
 const token = localStorage.FBIdToken;
 
 if(token){
   const decodedToken = jwtDecode(token);
-  console.log(decodedToken);
+  
   if(decodedToken.exp * 1000 < Date.now()){
     store.dispatch(logoutUser())
     window.location.href = '/login'
@@ -51,6 +54,8 @@ class App extends Component {
               <Route path="/" exact component={home} />
               <AuthRoute exact path="/login"  component={login} />
               <AuthRoute exact path="/signup"  component={signup} />
+              <Route exact path="/users/:handle" component={user} />
+              <Route exact path="/users/:handle/scream/:screamId" component={user}/>
             </Switch>
           </div>
         </Router>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {withStyles}  from '@material-ui/core/styles';
 
 import { connect } from 'react-redux';
-import { editUserDetails } from '../redux/actions/userActions';
+import { editUserDetails } from '../../redux/actions/userActions';
 
 // MUI imports
 import { Tooltip, IconButton } from '@material-ui/core';
@@ -17,7 +17,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 // Icons
 import EditIcon from '@material-ui/icons/Edit';
 import { classes } from 'istanbul-lib-coverage';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 
 const styles = (theme) => ({
     ...theme.spreadIt,
